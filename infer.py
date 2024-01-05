@@ -34,8 +34,7 @@ def predict(annotation, outputs, score_threshold):
         for box, score, label in zip(output['boxes'], output['scores'], output['labels']):
             if score > score_threshold: 
                 # label[1~10] -> label[0~9]
-                prediction_string += str(label-1) + ' ' + str(score) + ' ' + str(box[0]) + ' ' + str(
-                    box[1]) + ' ' + str(box[2]) + ' ' + str(box[3]) + ' '
+                prediction_string += str(label-1) + ' ' + str(score) + ' ' + str(box[0]) + ' ' + str(box[1]) + ' ' + str(box[2]) + ' ' + str(box[3]) + ' '
         prediction_strings.append(prediction_string)
         file_names.append(image_info['file_name'])
     return prediction_strings, file_names
