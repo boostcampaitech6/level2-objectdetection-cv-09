@@ -18,9 +18,9 @@
 - dataset.py에 가서 get_train_transform() 함수에서 인자 조정
 
 ### 학습
-'''{python}
+```{python}
 python train.py
-'''
+```
 
 
 ## 예측
