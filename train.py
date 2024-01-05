@@ -94,3 +94,6 @@ if __name__ == '__main__':
     trainer(num_epochs, trainloader, optimizer, model, device)
     
     print('\nTraining finish')
+
+    ckpt = configs['train']['checkpoint']
+    torch.save(model.state_dict(), ckpt)

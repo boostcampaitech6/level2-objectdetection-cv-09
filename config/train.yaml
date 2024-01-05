@@ -10,3 +10,4 @@ train:
   optimizer: "Adam"
   learning_rate: 0.001
   model: "Faster_R-CNN_ResNet50_FPN"
+  checkpoint: "./checkpoint/1.pth"
