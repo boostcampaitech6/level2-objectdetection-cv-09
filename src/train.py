@@ -14,6 +14,8 @@ from detectron2.data.datasets import register_coco_instances
 from detectron2.evaluation import COCOEvaluator
 from detectron2.data import build_detection_test_loader, build_detection_train_loader
 import detectron2.data.transforms as T
+import argparse
+from omegaconf import OmegaConf
 
 # mapper - input data를 어떤 형식으로 return할지 (따라서 augmnentation 등 데이터 전처리 포함 됨)
 def MyMapper(dataset_dict):
@@ -59,26 +61,35 @@ class MyTrainer(DefaultTrainer):
         return COCOEvaluator(dataset_name, cfg, False, output_folder)
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--config", type=str, default="config/train.yaml"
+    )
+    args = parser.parse_args()
+
+    with open(args.config, 'r') as f:
+        configs = OmegaConf.load(f)
+        
     # config 불러오기
     cfg = get_cfg()
-    cfg.merge_from_file(model_zoo.get_config_file('COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml'))
+    cfg.merge_from_file(model_zoo.get_config_file(configs['TRAIN']['config']))
 
     # config 수정하기
-    cfg.DATASETS.TRAIN = ('coco_trash_train',)
-    cfg.DATASETS.TEST = ('coco_trash_test',)
+    cfg.DATASETS.TRAIN = (configs['TRAIN']['name'],)
+    cfg.DATASETS.TEST = (configs['TESTNAME'],)
 
     cfg.DATALOADER.NUM_WOREKRS = 2
 
-    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url('COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml')
+    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(configs['TRAIN']['config'])
 
-    cfg.SOLVER.IMS_PER_BATCH = 4
-    cfg.SOLVER.BASE_LR = 0.001
+    cfg.SOLVER.IMS_PER_BATCH = configs['TRAIN']['batch_size']
+    cfg.SOLVER.BASE_LR = configs['TRAIN']['lr']
     cfg.SOLVER.MAX_ITER = 15000
-    cfg.SOLVER.STEPS = (8000,12000)
+    cfg.SOLVER.STEPS = (configs['TRAIN']['stepone'], configs['TRAIN']['steptwo'])
     cfg.SOLVER.GAMMA = 0.005
     cfg.SOLVER.CHECKPOINT_PERIOD = 3000
 
-    cfg.OUTPUT_DIR = './output'
+    cfg.OUTPUT_DIR = configs['TRAIN']['output_dir']
 
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 10
@@ -87,11 +98,11 @@ if __name__ == '__main__':
 
     # Register Dataset
     try:
-        register_coco_instances('coco_trash_train', {}, '../dataset/train.json', '../dataset/')
+        register_coco_instances(configs['TRAIN']['name'], {}, configs['DATA']['annotation'], configs['DATA']['data_dir'])
     except AssertionError:
         pass
 
-    MetadataCatalog.get('coco_trash_train').thing_classes = ["General trash", "Paper", "Paper pack", "Metal", 
+    MetadataCatalog.get(configs['TRAIN']['name']).thing_classes = ["General trash", "Paper", "Paper pack", "Metal", 
                                                          "Glass", "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing"]
 
     # train
