@@ -1,2 +1,2 @@
-python src/setup.py build develop
+python setup.py build develop
 python src/train.py 
