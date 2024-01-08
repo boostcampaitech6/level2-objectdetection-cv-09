@@ -96,7 +96,7 @@ if __name__ == '__main__':
     
     print('\nTraining finish')
 
-    if os.path.exists('./checkpoint'):
+    if not os.path.exists('./checkpoint'):
         os.mkdir('./checkpoint')
         
     ckpt = configs['train']['checkpoint']
