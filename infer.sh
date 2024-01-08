@@ -1,1 +1,1 @@
-python src/infer.py 
+python src/infer.py --config configs/infer.yaml

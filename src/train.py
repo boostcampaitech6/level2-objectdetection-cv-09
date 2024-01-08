@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     # config 수정하기
     cfg.DATASETS.TRAIN = (configs['TRAIN']['name'],)
-    cfg.DATASETS.TEST = (configs['TESTNAME'],)
+    cfg.DATASETS.TEST = (configs['TEST']['name'],)
 
     cfg.DATALOADER.NUM_WOREKRS = 2
 
@@ -99,6 +99,10 @@ if __name__ == '__main__':
     # Register Dataset
     try:
         register_coco_instances(configs['TRAIN']['name'], {}, configs['DATA']['annotation'], configs['DATA']['data_dir'])
+    except AssertionError:
+        pass
+    try:
+        register_coco_instances(configs['TEST']['name'], {}, configs['TEST']['annotation'], configs['DATA']['data_dir'])
     except AssertionError:
         pass
 

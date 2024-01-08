@@ -1,13 +1,15 @@
 DATA:
   annotation: "../dataset/train.json"
-  data_dir: "../dataset"
+  data_dir: "../dataset/"
 
-TESTNAME: "coco_trash_test"
+TEST:
+  name: "coco_trash_test"
+  annotation: "../dataset/test.json"
 
 TRAIN:
   name: "coco_trash_train"
   config: "COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml"
-  batch_size: 4
+  batch_size: 16
   lr: 0.001
   stepone: 8000
   steptwo: 12000

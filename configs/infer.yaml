@@ -1,0 +1,10 @@
+DATA:
+  annotation: "../dataset/test.json"
+  data_dir: '../dataset/'
+
+TEST:
+  name: "coco_trash_test"
+  config: "COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml"
+  ckp: "model_0002999.pth"
+  output_dir: "./output"
+  output_name: "submission_det2.csv"
