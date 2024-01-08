@@ -22,7 +22,7 @@ def get_train_transform():
 def get_valid_transform():
     return A.Compose([
         ToTensorV2(p=1.0)
-    ], bbox_params={'format': 'pascal_voc', 'label_fields': ['labels']})
+    ])
 
 
 def collate_fn(batch):
@@ -105,10 +105,11 @@ class TestDataset(Dataset):
     data_dir : dataset path
     '''
 
-    def __init__(self, annotation, data_dir):
+    def __init__(self, annotation, data_dir, transforms):
         super().__init__()
         self.data_dir = data_dir 
         self.coco = COCO(annotation)
+        self.transforms = transforms
 
     def __len__(self) -> int: 
         return len(self.coco.getImgIds())
@@ -129,6 +130,9 @@ class TestDataset(Dataset):
         ann_ids = self.coco.getAnnIds(imgIds=image_info['id'])
         anns = self.coco.loadAnns(ann_ids)
 
-        image = torch.tensor(image, dtype=torch.float32).permute(2,0,1)
+        if self.transforms:
+            image = self.transforms(image=image)['image']
+        else:
+            image = torch.tensor(image, dtype=torch.float32).permute(2,0,1)
 
         return image
