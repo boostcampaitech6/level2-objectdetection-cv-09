@@ -63,7 +63,7 @@ class MyTrainer(DefaultTrainer):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--config", type=str, default="config/train.yaml"
+        "--config", type=str, default="configs/train.yaml"
     )
     args = parser.parse_args()
 

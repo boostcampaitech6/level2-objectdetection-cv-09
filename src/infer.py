@@ -30,7 +30,7 @@ def MyMapper(dataset_dict):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--config", type=str, default="config/infer.yaml"
+        "--config", type=str, default="configs/infer.yaml"
     )
     args = parser.parse_args()
 
