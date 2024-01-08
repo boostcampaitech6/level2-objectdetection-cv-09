@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 
 import argparse
 from omegaconf import OmegaConf
+import os 
 
 
 def trainer(num_epochs, trainloader, optimizer, model, device):
@@ -95,5 +96,8 @@ if __name__ == '__main__':
     
     print('\nTraining finish')
 
+    if os.path.exists('./checkpoint'):
+        os.mkdir('./checkpoint')
+        
     ckpt = configs['train']['checkpoint']
     torch.save(model.state_dict(), ckpt)
