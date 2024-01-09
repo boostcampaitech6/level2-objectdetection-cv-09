@@ -22,6 +22,11 @@ def get_train_transform():
 def get_valid_transform():
     return A.Compose([
         ToTensorV2(p=1.0)
+    ],bbox_params={'format': 'pascal_voc', 'label_fields': ['labels']})
+
+def get_test_transform():
+    return A.Compose([
+        ToTensorV2(p=1.0)
     ])
 
 
@@ -99,6 +104,7 @@ class TrainDataset(Dataset):
         return image, target, image_id
 
 
+
 class TestDataset(Dataset):
     ''' 
     Make test dataset
@@ -116,8 +122,9 @@ class TestDataset(Dataset):
         return len(self.coco.getImgIds())
 
     def __getitem__(self, idx: int):
-        # Get image id
-        image_id = self.coco.getImgIds(imgIds=idx)
+        # Get ID of image
+        ids = self.coco.getImgIds()
+        image_id = self.coco.getImgIds(imgIds=ids[idx])
         # Get image info
         image_info = self.coco.loadImgs(image_id)[0]
         # Open image

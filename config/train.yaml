@@ -1,13 +1,18 @@
 data:
-  annotation : "../dataset/train.json"
+  train_annotation : "../dataset/train.json"
+  valid_annotation : "../dataset/val.json"
   data_dir: "../dataset"
 
 device: "cuda"
 batch_size: 16
 
 train:
-  epoch: 5
+  epoch: 200
   optimizer: "Adam"
   learning_rate: 0.001
   model: "Faster_R-CNN_ResNet50_FPN"
-  checkpoint: "./checkpoint/1.pth"
+  checkpoint: "./checkpoint/200.pth"
+  patience: 3
+
+eval:
+  score_threshold: 0.05

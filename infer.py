@@ -1,4 +1,4 @@
-from dataset import TestDataset, get_valid_transform
+from dataset import TestDataset, get_test_transform
 import models
 import pandas as pd 
 import torch
@@ -27,10 +27,10 @@ def predict(annotation, outputs, score_threshold):
     prediction_strings = []
     file_names = []
     coco = COCO(annotation)
-
+    ids = coco.getImgIds()
     for i, output in enumerate(outputs):
         prediction_string = ''
-        image_info = coco.loadImgs(coco.getImgIds(imgIds=i))[0]
+        image_info = coco.loadImgs(coco.getImgIds(imgIds=ids[i]))[0]
         for box, score, label in zip(output['boxes'], output['scores'], output['labels']):
             if score > score_threshold: 
                 # label[1~10] -> label[0~9]
