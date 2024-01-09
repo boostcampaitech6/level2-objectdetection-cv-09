@@ -50,7 +50,8 @@ class TrainDataset(Dataset):
     def __getitem__(self, idx:int):
 
         # Get ID of image
-        image_id = self.coco.getImgIds(imgIds=idx)
+        ids = self.coco.getImgIds()
+        image_id = self.coco.getImgIds(imgIds=ids[idx])
         # Get info about image ex) Width, height, id etc
         image_info = self.coco.loadImgs(image_id)[0]
 
