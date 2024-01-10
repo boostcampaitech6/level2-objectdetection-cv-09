@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     annotation = configs['data']['annotation']
     data_dir = configs['data']['data_dir']
-    transforms = get_valid_transform()
+    transforms = get_test_transform()
     batch_size = configs['batch_size']
 
     testset = TestDataset(annotation, data_dir, transforms)
