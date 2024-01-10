@@ -1,0 +1,11 @@
+data:
+  annotation : "../dataset/test.json"
+  data_dir: "../dataset"
+
+batch_size: 16
+checkpoint: "./checkpoint/1.pth"
+model: "Faster_R-CNN_ResNet50_FPN"
+device: "cuda"
+score_threshold: 0.05
+
+save_dir: "./faster_rcnn_torchvision_submission_10.csv"
