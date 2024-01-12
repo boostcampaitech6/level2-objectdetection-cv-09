@@ -30,6 +30,7 @@ train_dataloader = dict(
     batch_sampler=dict(type='AspectRatioBatchSampler'),
     dataset=dict(
         type=dataset_type,
+        metainfo=metainfo,
         data_root=data_root,
         ann_file='train_fold_4.json',
         data_prefix=dict(img=data_root),
@@ -44,6 +45,7 @@ val_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type=dataset_type,
+        metainfo=metainfo,
         data_root=data_root,
         ann_file='val_fold_4.json',
         data_prefix=dict(img=data_root),
