@@ -4,34 +4,34 @@ import shutil
 from tqdm import tqdm
 
 
-input_path = '../../dataset/train'
-output_path = '../../dataset/yolo_train'
+input_path = '../../dataset'
+output_path = '../../dataset/yolo_split_val'
 
 if not os.path.exists(output_path):
     os.makedirs(output_path)
     os.makedirs(os.path.join(output_path, 'images'))
     os.makedirs(os.path.join(output_path, 'labels'))
 
-file = '../../dataset/train.json'
+file = '../../dataset/val_fold_4.json'
 with open(file) as f:
     data = json.load(f)
 
 file_names = []
 
 
-def load_images_from_folder(folder):
-    count = 0
-    for filename in tqdm(sorted(os.listdir(folder)), desc='file copying...'):
+def load_images_from_folder(data, folder):
+    for d in tqdm(data['images'], desc='file copying...'):
+        filename = d['file_name']
         source = os.path.join(folder, filename)
-        destination = f"{output_path}/images/{str(count).zfill(4)}.jpg"
-        shutil.copy(source, destination)
         file_names.append(filename)
-        count += 1
+        filename = filename.replace('train/', '')
+        destination = f"{output_path}/images/{filename}"
+        shutil.copy(source, destination)
 
 
 def get_img(filename):
     for img in data['images']:
-        if img['file_name'] == 'train/'+filename:
+        if img['file_name'] == filename:
             return img
 
 
@@ -48,9 +48,7 @@ def get_img_ann(image_id):
         return print(image_id)
 
 
-load_images_from_folder(input_path)
-
-count = 0
+load_images_from_folder(data, input_path)
 
 for filename in tqdm(sorted(file_names), desc='make ann...'):
     img = get_img(filename)
@@ -62,7 +60,7 @@ for filename in tqdm(sorted(file_names), desc='make ann...'):
 
     if img_ann:
         file_object = open(
-            f"{output_path}/labels/{str(count).zfill(4)}.txt", "a"
+            f"{output_path}/labels/{str(img_id).zfill(4)}.txt", "a"
         )
 
         for ann in img_ann:
@@ -91,4 +89,3 @@ for filename in tqdm(sorted(file_names), desc='make ann...'):
             )
 
         file_object.close()
-        count += 1

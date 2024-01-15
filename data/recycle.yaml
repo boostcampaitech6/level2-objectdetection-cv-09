@@ -1,6 +1,6 @@
 path: ../../dataset
-train: yolo_train/images
-val: yolo_train/images
+train: yolo_split_train/images
+val: yolo_split_val/images
 test: test
 
 names:
