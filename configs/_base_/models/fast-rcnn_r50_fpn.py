@@ -21,7 +21,13 @@ model = dict(
         type='FPN',
         in_channels=[256, 512, 1024, 2048],
         out_channels=256,
-        num_outs=5),
+        num_outs=5,
+        anchor_generator=dict(
+            type='AnchorGenerator',
+            scales=[8],
+            ratios=[0.5,1.0,2.0],
+            strides=[4,8,16,32,64]
+        )),
     roi_head=dict(
         type='StandardRoIHead',
         bbox_roi_extractor=dict(
