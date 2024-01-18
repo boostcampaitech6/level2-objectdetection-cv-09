@@ -6,6 +6,8 @@ metainfo = {
                 "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 }
 
+backend_args = None
+
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True, with_mask=False),
@@ -34,7 +36,8 @@ train_dataloader = dict(
         ann_file='train_fold_4.json',
         data_prefix=dict(img=data_root),
         filter_cfg=dict(filter_empty_gt=True, min_size=32),
-        pipeline=train_pipeline))
+        pipeline=train_pipeline,
+        backend_args=backend_args))
 
 val_dataloader = dict(
     batch_size=1,
@@ -49,7 +52,8 @@ val_dataloader = dict(
         ann_file='val_fold_4.json',
         data_prefix=dict(img=data_root),
         test_mode=True,
-        pipeline=test_pipeline))
+        pipeline=test_pipeline,
+        backend_args=backend_args))
 test_dataloader = val_dataloader
 
 val_evaluator = dict(
