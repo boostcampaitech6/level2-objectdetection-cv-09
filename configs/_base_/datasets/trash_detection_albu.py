@@ -9,7 +9,7 @@ metainfo = {
 albu_train_transforms = [
     dict(
         type='CLAHE',
-        p=0.5),
+        p=0.3),
     dict(
         type='ShiftScaleRotate',
         shift_limit=0.0625,
@@ -28,6 +28,20 @@ albu_train_transforms = [
         contrast=0.2,
         p=0.2),
     dict(
+        type='Sharpen',
+        alpha=[0.1, 0.3],
+        lightness=[0.5, 1.0],
+        p=0.2),
+    dict(
+        type='Emboss',
+        alpha=0.2,
+        p=0.2),
+    dict(
+        type='JpegCompression',
+        quality_lower=85,
+        quality_upper=95,
+        p=0.2),
+    dict(
         type='OneOf',
         transforms=[
             dict(
@@ -44,8 +58,6 @@ albu_train_transforms = [
                 p=1.0)
         ],
         p=0.1),
-    dict(type='JpegCompression', quality_lower=85, quality_upper=95, p=0.2),
-    dict(type='ChannelShuffle', p=0.1),
     dict(
         type='OneOf',
         transforms=[

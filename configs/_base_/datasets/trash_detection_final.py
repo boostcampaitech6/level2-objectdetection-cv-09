@@ -9,8 +9,9 @@ metainfo = {
 img_scale = (512, 512)
 
 train_pipeline = [
-    dict(type='Mosaic', img_scale=img_scale,
-         center_ratio_range=(0.5, 1.0), prob=0.3),
+    dict(
+        type='Mosaic', img_scale=img_scale,
+        center_ratio_range=(0.5, 1.0), prob=0.3),
     dict(
         type='CutOut',
         n_holes=7,
@@ -30,8 +31,8 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=16,
-    num_workers=4,
+    batch_size=4,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     batch_sampler=dict(type='AspectRatioBatchSampler'),
