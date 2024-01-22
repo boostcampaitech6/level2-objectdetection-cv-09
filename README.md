@@ -2,7 +2,7 @@
 
 ## 팀 소개
 | 이름 | 역할 |
-| --- | --- |
+| ---- | --- |
 | [박상언](https://github.com/PSangEon) | Detectron2 baseline code 작성, 모자이크 코드 작성, 트랜스포머 모형 실험 |
 | [지현동](https://github.com/tolfromj) | EDA, MMDectection 실험, 증강 기법 실험, Anchor box 실험, 모형 실험, Git 현황 관리 |
 | [오왕택](https://github.com/ohkingtaek) | EDA, YOLO, MMDetection baseline code 작성, 시각화 코드 작성, 증강 기법 실험, 수도 라벨링, 모형 실험, 앙상블 실험 |
