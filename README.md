@@ -5,7 +5,7 @@
 | ---- | --- |
 | [박상언](https://github.com/PSangEon) | Detectron2 baseline code 작성, 모자이크 코드 작성, 트랜스포머 모형 실험 |
 | [지현동](https://github.com/tolfromj) | EDA, MMDectection 실험, 증강 기법 실험, Anchor box 실험, 모형 실험, Git 현황 관리 |
-| [오왕택](https://github.com/ohkingtaek) | EDA, YOLO, MMDetection baseline code 작성, 시각화 코드 작성, 증강 기법 실험, 수도 라벨링, 모형 실험, 앙상블 실험 |
+| [오왕택](https://github.com/ohkingtaek) | EDA, YOLO, MMDetection baseline code 작성, 시각화 코드 작성, 증강 기법 실험,</br>수도 라벨링, 모형 실험, 앙상블 실험 |
 | [이동호](https://github.com/as9786) | Torchvision baseline code 작성, Detectron2 실험, Anchor box 실험, WBF code 작성, 모형 실험 |
 | [송지민](https://github.com/Remiing) | EDA, YOLO, MMDetection baseline code 작성, 시각화 코드 작성 |
 | [이주헌](https://github.com/LeeJuheonT6138) | Detectron2 실험, YOLO 실험, Git 현황 관리 |
@@ -39,6 +39,9 @@
 
 ## 프로젝트 결과
 - 프로젝트 결과는 Public 4등, Private 3등이라는 결과를 얻었습니다.
+![](https://github.com/boostcampaitech6/level2-objectdetection-cv-09/assets/49676680/bd476ae8-2d62-4cb0-bb49-99c92b22176c)
+![](https://github.com/boostcampaitech6/level2-objectdetection-cv-09/assets/49676680/328b1ab6-d9f4-41f3-aeb3-e9fe1e403fc6)
+
 
 ## Wrap-Up Report
 
